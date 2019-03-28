@@ -1,3 +1,13 @@
-#line{
+#line,#line2{
   fill:none;
-  stroke:teal;}
+  stroke:teal;
+}
+.line{
+    stroke-width:3px;
+}
+.xAxis .tick{
+    opacity:0;
+  }
+circle:hover{
+  fill:orange;
+}
