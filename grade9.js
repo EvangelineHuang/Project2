@@ -44,8 +44,8 @@ grade.then(function(data){
         .attr("fill","black")
         .on("mouseover",function(d){
           d3.select("#tooltip1")
-            .style("left",w+margin.left+margin.right)
-            .style("top",50)
+            .style("left",w+margin.left+margin.right+300)
+            .style("top",150)
             .select("#grade1")
             .text(d.grade);
            d3.select("#day1")
@@ -94,8 +94,8 @@ grade.then(function(data){
         .attr("fill","black")
         .on("mouseover",function(d){
           d3.select("#tooltip1")
-            .style("left",w+margin.left+margin.right)
-            .style("top",50+h+margin.top+margin.bottom)
+            .style("left",w+margin.left+margin.right+300)
+            .style("top",200+h+margin.top+margin.bottom)
             .select("#grade1")
             .text(d.grade);
            d3.select("#day1")

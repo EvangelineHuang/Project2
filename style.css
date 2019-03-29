@@ -1,6 +1,9 @@
+body{
+  background-color:#dfe6ea;
+}
 #line, #line2{
   fill:none;
-  stroke:teal;
+  stroke:#363813;
 }
 .line{
     stroke-width:3px;
@@ -9,7 +12,10 @@
     opacity:0;
   }
 circle:hover{
-  fill:orange;
+  fill:#848c57;
+}
+circle{
+  fill:#c6d6b0;
 }
 .hidden{
   display:none;
@@ -24,6 +30,55 @@ circle:hover{
   box-shadow:4px 4px 10px rgba(0,0,0,0.4);
 
 }
-svg{
-  display: block;
+#line{
+  position:absolute;
+  top:150px;
+  left:25%
+}
+#line2{
+  position:absolute;
+  top:750px;
+  left:25%;
+}
+.prev img{
+  position:fixed;
+  top:20px;
+}
+.prev button{
+  position:fixed;
+  top:35px;
+  left:70px;
+}
+.next img{
+  position:fixed;
+  top:20px;
+  right:20px;
+}
+.next button{
+  position:fixed;
+  top:35px;
+  right:80px;
+}
+.student{
+  position:absolute;
+  left:50%;
+}
+.student p{
+  position:absolute;
+  left:15px;
+  width:100px;
+}
+#directory{
+  position:fixed;
+  bottom:12%;
+  right:80px;
+}
+#home{
+  position:fixed;
+  bottom:8%;
+  right:80px;
+}
+text{
+  font-size:14px;
+  fill:#363813;
 }

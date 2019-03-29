@@ -44,8 +44,8 @@ grade.then(function(data){
         .attr("fill","black")
         .on("mouseover",function(d){
           d3.select("#tooltip1")
-            .style("left",w+margin.left+margin.right)
-            .style("top",50)
+            .style("left",w+margin.left+margin.right+300)
+            .style("top",150)
             .select("#grade1")
             .text(d.grade);
            d3.select("#day1")
@@ -85,7 +85,7 @@ grade.then(function(data){
      .call(yAxis)
      .attr("transform","translate("+(margin.left+margin.right)+",0)");
      svg.selectAll("circle")
-        .data(data[22].homework)
+        .data(data[22].quizes)
         .enter()
         .append("circle")
         .attr("cx",function(d){return xScale(d.day,10);})
@@ -93,16 +93,16 @@ grade.then(function(data){
         .attr("r","5")
         .attr("fill","black")
         .on("mouseover",function(d){
-          d3.select("#tooltip1")
-            .style("left",w+margin.left+margin.right)
-            .style("top",50+h+margin.top+margin.bottom)
-            .select("#grade1")
+          d3.select("#tooltip2")
+            .style("left",w+margin.left+margin.right+300)
+            .style("top",200+h+margin.top+margin.bottom)
+            .select("#grade2")
             .text(d.grade);
-           d3.select("#day1")
+           d3.select("#day2")
              .text(d.day)
-         d3.select("#tooltip1").classed("hidden",false);
+         d3.select("#tooltip2").classed("hidden",false);
         })
         .on("mouseout",function(){
-         d3.select("#tooltip1").classed("hidden",true);
+         d3.select("#tooltip2").classed("hidden",true);
         });
 },function(err){console.log(err);})
