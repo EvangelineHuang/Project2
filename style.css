@@ -1,4 +1,4 @@
-#line,#line2{
+#line, #line2{
   fill:none;
   stroke:teal;
 }
@@ -10,4 +10,20 @@
   }
 circle:hover{
   fill:orange;
+}
+.hidden{
+  display:none;
+}
+#tooltip1,#tooltip2{
+  position:absolute;
+  width:80px;
+  padding:10px;
+  border-radius: 10px;
+  pointer-events:none;
+  background-color:white;
+  box-shadow:4px 4px 10px rgba(0,0,0,0.4);
+
+}
+svg{
+  display: block;
 }

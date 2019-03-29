@@ -41,7 +41,20 @@ grade.then(function(data){
      .attr("cx",function(d){return xScale(d.day,10);})
      .attr("cy",function(d){return yScale(d.grade,10);})
      .attr("r","5")
-     .attr("fill","black");
+     .attr("fill","black")
+     .on("mouseover",function(d){
+       d3.select("#tooltip1")
+         .style("left",w+margin.left+margin.right)
+         .style("top",50)
+         .select("#grade1")
+         .text(d.grade);
+        d3.select("#day1")
+          .text(d.day)
+      d3.select("#tooltip1").classed("hidden",false);
+     })
+     .on("mouseout",function(){
+      d3.select("#tooltip1").classed("hidden",true);
+     });
 },function(err){console.log(err);})
 /////////////////////////////////////////////////
 grade.then(function(data){
@@ -78,5 +91,20 @@ grade.then(function(data){
         .attr("cx",function(d){return xScale(d.day,10);})
         .attr("cy",function(d){return yScale(d.grade,10);})
         .attr("r","5")
-        .attr("fill","black");
+        .attr("fill","black")
+        .on("mouseover",function(d){
+          //var x=parseFloat(d3.select(this).attr("cx"));
+          //var y=parseFloat(d3.select(this).attr("cy"));
+          d3.select("#tooltip2")
+            .style("left",w+margin.left+margin.right)
+            .style("top",50+h+margin.top+margin.bottom)
+            .select("#grade2")
+            .text(d.grade);
+           d3.select("#day2")
+             .text(d.day)
+         d3.select("#tooltip2").classed("hidden",false);
+        })
+        .on("mouseout",function(){
+         d3.select("#tooltip2").classed("hidden",true);
+        });
 },function(err){console.log(err);})
