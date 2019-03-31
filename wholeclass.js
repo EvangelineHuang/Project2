@@ -39,6 +39,13 @@ grade.then(function(data){
      .classed("testyAxis",true)
      .call(yAxis)
      .attr("transform","translate("+margin.left+",0)");
+  svg.selectAll("circle")
+     .data(test1)
+     .enter()
+     .append("circle")
+     .attr("cx",function(d,i){return xScale(i);})
+     .attr("cy",function(d){return yScale(d);})
+     .attr("r",5);
 },function(err){console.log(err);});
 /////////////////////////////////////////
 grade.then(function(data){
@@ -75,10 +82,17 @@ grade.then(function(data){
      .classed("testyAxis",true)
      .call(yAxis)
      .attr("transform","translate("+margin.left+",0)");
+     svg.selectAll("circle")
+        .data(test2)
+        .enter()
+        .append("circle")
+        .attr("cx",function(d,i){return xScale(i);})
+        .attr("cy",function(d){return yScale(d);})
+        .attr("r",5);
 },function(err){console.log(err);});
 ////////////////////////////////////////////
 grade.then(function(data){
-  var test1=data.map(function(d){
+  var final=data.map(function(d){
     return d.final[0].grade;
   });
 
@@ -99,7 +113,7 @@ grade.then(function(data){
     .attr("height",height+margin.top+margin.bottom);
 
  svg.append("path")
-    .datum(test1)
+    .datum(final)
     .classed("testline",true)
     .attr("d",line);
   var xAxis=d3.axisBottom(xScale);
@@ -112,4 +126,11 @@ grade.then(function(data){
      .classed("testyAxis",true)
      .call(yAxis)
      .attr("transform","translate("+margin.left+",0)");
+     svg.selectAll("circle")
+        .data(final)
+        .enter()
+        .append("circle")
+        .attr("cx",function(d,i){return xScale(i);})
+        .attr("cy",function(d){return yScale(d);})
+        .attr("r",5);
 },function(err){console.log(err);});

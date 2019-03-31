@@ -16,6 +16,7 @@ circle:hover{
 }
 circle{
   fill:#c6d6b0;
+  stroke:#363813;
 }
 .hidden{
   display:none;
@@ -84,5 +85,5 @@ text{
 }
 .testline{
   fill:none;
-  stroke:teal;
+  stroke:#363813;
 }
