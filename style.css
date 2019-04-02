@@ -132,7 +132,7 @@ p{
   margin-left:20px;
 }
 .wholehtml{
-  position:absolute;
+  position:fixed;
   right:20px;
   bottom:50px;
 }
@@ -142,4 +142,16 @@ p{
   height:100px;
   position:absolute;
   left:45px;
+  top:550px;
+}
+#note{
+  border-left:1px black solid;
+  width:150px;
+  float:right;
+  height:100px;
+  border-collapse: collapse;
+}
+ul{
+  position:relative;
+  right:10px;
 }

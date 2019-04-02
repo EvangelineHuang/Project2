@@ -54,12 +54,6 @@ var graph=function(data,datum,rank){
         .classed("testyAxis",true)
         .call(yAxis)
         .attr("transform","translate("+margin.left+",0)");
-    d3.select("body")
-      .append("div")
-      .attr("id","rank")
-      .classed("whole",true)
-      .append("h1")
-      .text("Ranking")
     d3.select("#rank")
       .selectAll("p")
       .data(rank)
@@ -83,7 +77,8 @@ var graph=function(data,datum,rank){
         d3.selectAll("rect")
           .attr("stroke","none")
       });
-
+      d3.select("#ranking")
+        .text("Test 1")
 }
 ///////////////////////////////////////////
 var changegraph=function(data,datum,rank){
@@ -110,14 +105,6 @@ var changegraph=function(data,datum,rank){
      .attr("height",function(d){return height-yScale(d)})
      .attr("class",function(d,i){
        return datum[i].name;})
-     svg.append("g")
-        .classed("testxAxis",true)
-        .call(xAxis)
-        .attr("transform","translate(0,"+height+")");
-     svg.append("g")
-        .classed("testyAxis",true)
-        .call(yAxis)
-        .attr("transform","translate("+margin.left+",0)");
         d3.selectAll("p")
           .data(rank)
           .attr("class",function(d){
@@ -150,6 +137,7 @@ grade.then(function(data){
     return d.test[0];
   });
     graph(test1,data,rank1);
+
 },function(err){console.log(err);});
 
 d3.select("body")
@@ -161,6 +149,8 @@ d3.select("body")
         return d.test[0];
       });
         changegraph(test1,data,rank1);
+        d3.select("#ranking")
+          .text("Test 1")
     },function(err){console.log(err);});
   })
   .text("Test 1");
@@ -174,6 +164,8 @@ d3.select("body")
         return d.test[1];
       });
         changegraph(test2,data,rank2);
+        d3.select("#ranking")
+          .text("Test 2")
     },function(err){console.log(err);});
   })
   .text("Test 2");
@@ -187,6 +179,8 @@ d3.select("body")
           return d.test[2];
         });
           changegraph(final,data,frank);
+          d3.select("#ranking")
+            .text("Final")
       },function(err){console.log(err);});
     })
     .text("Final");
