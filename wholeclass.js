@@ -6,6 +6,32 @@ var margin={
   top:20,
   bottom:20
 }
+//ranking changes
+var change=[{name:"bookworm",test2:-2,final:-3},
+{name:"crafty",test2:-6,final:6},
+{name:"cyclist",test2:1,final:-1},
+{name:"drunken",test2:5,final:5},
+{name:"Easter",test2:8,final:-1},
+{name:"ebook",test2:-1,final:0},
+{name:"Farmer",test2:-12,final:6},
+{name:"gentleman",test2:5,final:4},
+{name:"judo",test2:-1,final:1},
+{name:"moana",test2:3,final:-9},
+{name:"painter",test2:8,final:10},
+{name:"grill",test2:-1,final:0},
+{name:"pharaoh",test2:-6,final:-1},
+{name:"pilot",test2:1,final:-4},
+{name:"Pinga",test2:-11,final:6},
+{name:"pixie",test2:4,final:5},
+{name:"sailor",test2:0,final:5},
+{name:"santa",test2:0,final:-3},
+{name:"tauch",test2:7,final:-15},
+{name:"tux",test2:-1,final:2},
+{name:"valentine-ocal",test2:0,final:-4},
+{name:"valentine",test2:3,final:-5},
+{name:"wizard",test2:-4,final:-4}]
+//console.log(change)
+
 var graph=function(data,datum,rank){
   var width=500;
   var height=500;
@@ -79,10 +105,7 @@ var graph=function(data,datum,rank){
       });
       d3.select("#ranking")
         .text("Test 1")
-      //info box
-    /*  d3.select("#info")
-        .selectAll("g")
-        .data() */
+
 }
 ///////////////////////////////////////////
 var changegraph=function(data,datum,rank){
