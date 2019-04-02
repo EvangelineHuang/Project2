@@ -1,7 +1,7 @@
 body{
   background-color:#dfe6ea;
 }
-#line, #line2{
+#line, #line2,#line3{
   fill:none;
   stroke:#363813;
 }
@@ -21,8 +21,8 @@ circle{
 .hidden{
   display:none;
 }
-#tooltip1,#tooltip2{
-  position:absolute;
+#tooltip1,#tooltip2,#tooltip3{
+  position:fixed;
   width:80px;
   padding:10px;
   border-radius: 10px;
@@ -40,6 +40,11 @@ circle{
   position:absolute;
   top:750px;
   left:25%;
+}
+#line3{
+  position:absolute;
+  top:1350px;
+  left:26%;
 }
 .prev img{
   position:fixed;
@@ -87,4 +92,35 @@ text{
   fill:none;
   stroke:#363813;
   stroke-width:3px
+}
+rect:hover{
+  stroke: black;
+}
+p{
+  float:left;
+  padding-left:3px;
+  display:inline-block;
+  width:240px;
+}
+.whole{
+  position:relative;
+  bottom:530px;
+  left:630px;
+  margin-right:50px;
+  width:520px;
+  height:700px;
+  border:2px black solid;
+  padding-left:10px;
+  padding-right:10px;
+}
+.test1,.test2,.final{
+  position:relative;
+  top:20px;
+  right:400px;
+  margin-left:20px;
+}
+.wholehtml{
+  position:absolute;
+  left:50px;
+  top:600px;
 }

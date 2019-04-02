@@ -1,6 +1,6 @@
 var w = 300;
 var h = 300;
-var r = Math.min(w,h)/2;
+var r = h/2;
 
 var color = d3.scaleOrdinal(["#DD6E42","#E8DAB2","#6E9075","#C0D6DF","#EAEAEA","#5D737E"]);
 
@@ -9,7 +9,6 @@ var data = [{"label":"Quizzes", "value":15},
             {"label":"Test-1", "value":20},
             {"label":"Test-2", "value":20},
             {"label":"Final", "value":30}];
-            console.log(data)
 
     var plot = d3.select("body")
                 .append("svg")
@@ -26,7 +25,7 @@ var data = [{"label":"Quizzes", "value":15},
                 .sort(null)
                 .value(function(d) { return d.value; })(data);
 
-    var arcs = plot.selectAll("arc")
+    var arcs = plot.selectAll("g")
                    .data(pie)
                    .enter()
                    .append("g")
@@ -37,31 +36,27 @@ var data = [{"label":"Quizzes", "value":15},
             .attr("fill",function(d,i){return color(i)})
         arcs.append("text")
             .attr("transform", function(d){
-                innerRadius = 0;
-                outerRadius = r;
                 return "translate(" + arc.centroid(d) + ")";
             })
             .attr("text-anchor", "middle")
             .text(function(d, i) { return data[i].label; })
             .attr("x", 0)
-            .attr("y", "0em");
+            .attr("y", 0);
+
         arcs.append("text")
             .attr("transform", function(d){
-                    innerRadius = 0;
-                    outerRadius = r;
                     return "translate(" + arc.centroid(d) + ")";
                 })
             .attr("text-anchor", "middle")
             .text(function(d, i) { return data[i].value; })
             .attr("x", -5)
             .attr("y", "1.4em");
+
         arcs.append("text")
             .attr("transform", function(d){
-                innerRadius = 0;
-                outerRadius = r;
                 return "translate(" + arc.centroid(d) + ")";
             })
             .attr("text-anchor", "middle")
-            .text(function(d, i) { return "%"; })
+            .text("%")
             .attr("x", 13)
             .attr("y", "1.4em");
