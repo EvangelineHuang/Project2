@@ -79,6 +79,10 @@ var graph=function(data,datum,rank){
       });
       d3.select("#ranking")
         .text("Test 1")
+      //info box
+    /*  d3.select("#info")
+        .selectAll("g")
+        .data() */
 }
 ///////////////////////////////////////////
 var changegraph=function(data,datum,rank){
