@@ -45,6 +45,7 @@ var graph=function(data,datum,rank){
        d3.selectAll("p")
          .style("background-color","transparent")
      });
+
      svg.append("g")
         .classed("testxAxis",true)
         .call(xAxis)
@@ -55,10 +56,11 @@ var graph=function(data,datum,rank){
         .attr("transform","translate("+margin.left+",0)");
     d3.select("body")
       .append("div")
+      .attr("id","rank")
       .classed("whole",true)
       .append("h1")
       .text("Ranking")
-    d3.select("div")
+    d3.select("#rank")
       .selectAll("p")
       .data(rank)
       .enter()

@@ -113,14 +113,33 @@ p{
   padding-left:10px;
   padding-right:10px;
 }
-.test1,.test2,.final{
-  position:relative;
-  top:20px;
-  right:400px;
+.test1{
+  position:absolute;
+  top:50px;
+  left:550px;
+  margin-left:20px;
+}
+.test2{
+  position:absolute;
+  top:80px;
+  left:550px;
+  margin-left:20px;
+}
+.final{
+  position:absolute;
+  top:110px;
+  left:550px;
   margin-left:20px;
 }
 .wholehtml{
   position:absolute;
-  left:50px;
-  top:600px;
+  right:20px;
+  bottom:50px;
+}
+#info{
+  border:1px black solid;
+  width:510px;
+  height:100px;
+  position:absolute;
+  left:45px;
 }
