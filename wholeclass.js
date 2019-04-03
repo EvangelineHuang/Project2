@@ -10,6 +10,26 @@ var margin={
   top:20,
   bottom:20
 }
+var rank1=[{name:"wizard",grade:"100"},{name:"tux",	grade:"91"},{name:"crafty",grade:"90"},
+           {name:"moana",grade:"89"},{name:"pilot",grade:"85"},{name:"Farmer",grade:"76"},{name:"sailor",grade:"74"},
+           {name:"Pinga",grade:"72"},{name:"tauch",grade:"71"},{name:"valentine-ocal",grade:"70"},{name:"bookworm",grade:"68"},
+           {name:"santa",grade:"68"},{name:"gentleman",grade:"67"},{name:"Easter",grade:"65"},{name:"pharaoh",grade:"63"},
+           {name:"drunken",grade:"59"},{name:"valentine",grade:"54"},{name:"cyclist",grade:"49"},{name:"ebook",grade:"48"},
+           {name:"pixie",grade:"47"},{name:"judo",grade:"45"},{name:"grill",grade:"44"},{name:"painter",grade:"43"}];
+//ranking of test2
+var rank2=[{name:"moana",grade:"100"},{name:"tauch",grade:"90"},{name:"tux",grade:"88"},{name:"pilot",grade:"86"},
+          {name:"wizard",grade:"86"},{name:"Easter",grade:"83"},{name:"sailor",grade:"80"},{name:"gentleman",grade:"71"},
+          {name:"crafty",	grade:"70"},{name:"valentine-ocal",grade:"70"},{name:	"drunken",grade:"68"},{name:"santa",grade:"66"},
+          {name:"bookworm",	grade:"65"},{name:"valentine",grade:"62"},{name:"painter",grade:"61"},{name:"pixie",grade:"57"},
+          {name:"cyclist",	grade:"56"},{name:"Farmer",grade:"54"},{name:"Pinga",grade:"52"},{name:"ebook",grade:"33"},
+          {name:"pharaoh",grade:"28"},{name:"judo",grade:"19"},{name:"grill",grade:"14"}]
+//ranking of final
+var frank=[{name:"tux",grade:"97"},{name:"sailor",grade:"91"},{name:"crafty",grade:"77"},{name:"gentleman",grade:"75"},{name:"painter",grade:"75"},
+          {name:"drunken",grade:"74"},{name:"Easter",grade:"71"},{name:"pilot",grade:"71"},{name:"wizard",grade:"68"},{name:"moana",grade:"67"},
+          {name:"pixie",grade:"62"},{name:"Farmer",grade:"60"},{name:"Pinga",grade:"59"},{name:"valentine-ocal",grade:"58"},{name:"santa",grade:"57"},
+          {name:"bookworm",grade:"55"},{name:"tauch",grade:"54"},{name:"cyclist",grade:"46"},{name:"valentine",grade:"46"},{name:"ebook",grade:"44"},
+          {name:"judo",grade:"29"},{name:"pharaoh",grade:"19"},{name:"grill",grade:"14"}]
+
 function homework(data,ind){
   console.log(data)
   var xScale=d3.scaleLinear()
@@ -241,6 +261,85 @@ var graph=function(data,datum,rank,dt){
        homework(dt,i);
        quize(dt,i);
       test(datum,i);
+      body.append("button")
+          .on("click",function(){
+            d3.select("#body").remove();
+            var body=d3.select("body")
+              .append("div")
+              .attr("id","body");
+            body.append("svg")
+                .attr("id","test1")
+            body.append("div")
+                .attr("id","rank")
+                .classed("whole",true)
+                .append("h1")
+                .text("Ranking:")
+                .append("span")
+                .classed("wholehtml",true)
+            bgrade.then(function(data){
+
+              var test1=data.map(function(d){
+                return d.test[0].grade;
+              });
+              grade.then(function(d){
+                graph(test1,d,rank1,data);},function(err){console.log(err);});
+            },function(err){console.log(err);});
+
+            d3.select("#body")
+              .append("button")
+              .classed("test1",true)
+              .on("click",function(){
+                bgrade.then(function(data){
+                  var test1=data.map(function(d){
+                    return d.test[0].grade;
+                  });
+                  grade.then(function(d){
+                    changegraph(test1,d,rank1,data);
+                    },function(err){console.log(err);});
+                    d3.select("#ranking")
+                      .text("Test 1")
+                },function(err){console.log(err);});
+              })
+              .text("Test 1");
+
+            d3.select("#body")
+              .append("button")
+              .classed("test2",true)
+              .on("click",function(){
+                bgrade.then(function(data){
+                  var test2=data.map(function(d){
+                    return d.test[1].grade;
+                  });
+                  grade.then(function(d){
+                    changegraph(test2,d,rank2,data);
+                    },function(err){console.log(err);});
+                    d3.select("#ranking")
+                      .text("Test 2")
+                },function(err){console.log(err);});
+              })
+              .text("Test 2");
+
+              d3.select("#body")
+                .append("button")
+                .classed("final",true)
+                .on("click",function(){
+                  grade.then(function(data){
+                    var final=data.map(function(d){
+                      console.log(d)
+                      return d.test[2];
+                    });
+                    grade.then(function(d){
+                      changegraph(final,d,frank,data);
+                      },function(err){console.log(err);});
+                      d3.select("#ranking")
+                        .text("Final")
+
+                  },function(err){console.log(err);});
+                })
+                .text("Final");
+
+          })
+          .text("Go Back")
 
      })
 
@@ -316,25 +415,6 @@ var changegraph=function(data,datum,rank){
           })
 }
 //ranking of test1
-var rank1=[{name:"wizard",grade:"100"},{name:"tux",	grade:"91"},{name:"crafty",grade:"90"},
-           {name:"moana",grade:"89"},{name:"pilot",grade:"85"},{name:"Farmer",grade:"76"},{name:"sailor",grade:"74"},
-           {name:"Pinga",grade:"72"},{name:"tauch",grade:"71"},{name:"valentine-ocal",grade:"70"},{name:"bookworm",grade:"68"},
-           {name:"santa",grade:"68"},{name:"gentleman",grade:"67"},{name:"Easter",grade:"65"},{name:"pharaoh",grade:"63"},
-           {name:"drunken",grade:"59"},{name:"valentine",grade:"54"},{name:"cyclist",grade:"49"},{name:"ebook",grade:"48"},
-           {name:"pixie",grade:"47"},{name:"judo",grade:"45"},{name:"grill",grade:"44"},{name:"painter",grade:"43"}];
-//ranking of test2
-var rank2=[{name:"moana",grade:"100"},{name:"tauch",grade:"90"},{name:"tux",grade:"88"},{name:"pilot",grade:"86"},
-          {name:"wizard",grade:"86"},{name:"Easter",grade:"83"},{name:"sailor",grade:"80"},{name:"gentleman",grade:"71"},
-          {name:"crafty",	grade:"70"},{name:"valentine-ocal",grade:"70"},{name:	"drunken",grade:"68"},{name:"santa",grade:"66"},
-          {name:"bookworm",	grade:"65"},{name:"valentine",grade:"62"},{name:"painter",grade:"61"},{name:"pixie",grade:"57"},
-          {name:"cyclist",	grade:"56"},{name:"Farmer",grade:"54"},{name:"Pinga",grade:"52"},{name:"ebook",grade:"33"},
-          {name:"pharaoh",grade:"28"},{name:"judo",grade:"19"},{name:"grill",grade:"14"}]
-//ranking of final
-var frank=[{name:"tux",grade:"97"},{name:"sailor",grade:"91"},{name:"crafty",grade:"77"},{name:"gentleman",grade:"75"},{name:"painter",grade:"75"},
-          {name:"drunken",grade:"74"},{name:"Easter",grade:"71"},{name:"pilot",grade:"71"},{name:"wizard",grade:"68"},{name:"moana",grade:"67"},
-          {name:"pixie",grade:"62"},{name:"Farmer",grade:"60"},{name:"Pinga",grade:"59"},{name:"valentine-ocal",grade:"58"},{name:"santa",grade:"57"},
-          {name:"bookworm",grade:"55"},{name:"tauch",grade:"54"},{name:"cyclist",grade:"46"},{name:"valentine",grade:"46"},{name:"ebook",grade:"44"},
-          {name:"judo",grade:"29"},{name:"pharaoh",grade:"19"},{name:"grill",grade:"14"}]
 
 bgrade.then(function(data){
 
@@ -383,10 +463,11 @@ d3.select("#body")
     .append("button")
     .classed("final",true)
     .on("click",function(){
-      bgrade.then(function(data){
+      grade.then(function(data){
         var final=data.map(function(d){
-          return d.test[2].grade;
+          return d.test[2];
         });
+
         grade.then(function(d){
           changegraph(final,d,frank,data);
           },function(err){console.log(err);});
