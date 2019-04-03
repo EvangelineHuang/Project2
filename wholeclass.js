@@ -1,6 +1,6 @@
 var grade=d3.json("3Grades.json");
 var bgrade=d3.json("penguins/classData.json");
-var change=d3.csv("GradesChange.csv")
+var changedata=d3.csv("GradesChange.csv")
 var width=500;
 var height=500;
 var padding=2;
@@ -10,6 +10,7 @@ var margin={
   top:20,
   bottom:20
 }
+//ranking of test1
 var rank1=[{name:"wizard",grade:"100"},{name:"tux",	grade:"91"},{name:"crafty",grade:"90"},
            {name:"moana",grade:"89"},{name:"pilot",grade:"85"},{name:"Farmer",grade:"76"},{name:"sailor",grade:"74"},
            {name:"Pinga",grade:"72"},{name:"tauch",grade:"71"},{name:"valentine-ocal",grade:"70"},{name:"bookworm",grade:"68"},
@@ -258,6 +259,10 @@ var graph=function(data,datum,rank,dt){
           t3.append("br")
             t3.append("span")
               .attr("id","Name")
+        body.append("p")
+        .classed("wstudent",true)
+            .text(datum[i].name)
+
        homework(dt,i);
        quize(dt,i);
       test(datum,i);
@@ -337,6 +342,42 @@ var graph=function(data,datum,rank,dt){
                   },function(err){console.log(err);});
                 })
                 .text("Final");
+                d3.select("#body")
+                  .append("button")
+                  .classed("change1",true)
+                  .on("click",function(){
+                    changedata.then(function(data){
+                      var c1=data.map(function(ele){
+                        return ele.change1;
+                      })
+                      change(data,c1);
+                    },function(err){console.log(err)})
+                  })
+                  .text("Change1")
+                  d3.select("#body")
+                    .append("button")
+                    .classed("change2",true)
+                    .on("click",function(){
+                      changedata.then(function(data){
+                        var c2=data.map(function(ele){
+                          return ele.change2;
+                        })
+                        change(data,c2);
+                      },function(err){console.log(err)})
+                    })
+                    .text("Change2")
+                    d3.select("#body")
+                      .append("button")
+                      .classed("change3",true)
+                      .on("click",function(){
+                        changedata.then(function(data){
+                          var c3=data.map(function(ele){
+                            return ele.change3;
+                          })
+                          change(data,c3);
+                        },function(err){console.log(err)})
+                      })
+                      .text("Change3")
 
           })
           .text("Go Back")
@@ -391,11 +432,50 @@ var changegraph=function(data,datum,rank){
   var yScale=d3.scaleLinear()
                .domain([0,100])
                .range([height,margin.top]);
+  var xAxis=d3.axisBottom(xScale);
+  var yAxis=d3.axisLeft(yScale);
+  var color=["#ccebb4","#bfe6b5","#b4e2b6","#a8ddb7","#9cd8b8","#91d4b9","#86d0bb","#71c8bd","#66c3bf","#59bec0","#4eb9c1","#45b3c2","#3fafc2","#34a7c2","#2c9dc0","#2897bf","#238cbc","#217fb7","#2076b3","#216aae","#225ea8","#2353a3","#23499d"]
+
   var svg=d3.select("#test1")
     .attr("width",width+margin.left+margin.right)
     .attr("height",height+margin.top+margin.bottom);
-  var xAxis=d3.axisBottom(xScale);
-  var yAxis=d3.axisLeft(yScale);
+    svg.select("g.testxAxis")
+       .call(xAxis)
+       .attr("transform","translate(0,"+height+")");
+    svg.select("g.testyAxis")
+       .call(yAxis)
+       .attr("transform","translate("+margin.left+",0)");
+       d3.select("h1")
+         .attr("id","#ranking")
+         .text("Ranking: Test 1")
+       d3.select("#rank")
+         .selectAll("p")
+         .data(rank)
+         .enter()
+         .append("p")
+         .attr("class",function(d){
+           return d.name;
+         })
+         .text(function(d,i){
+           return i+1+". Name: "+d.name+", Grade: "+d.grade+";";
+         })
+         d3.selectAll("rect")
+         .on("mouseover",function(){
+
+           var name=d3.select(this).attr("class");
+           d3.select(this).style("background-color","orange")
+           d3.select("rect."+name)
+             .attr("stroke","black")
+         })
+         .on("mouseout",function(){
+           d3.selectAll("p").style("background-color","transparent")
+           d3.selectAll("rect")
+             .attr("stroke","none")
+         })
+
+
+
+
   svg.selectAll("rect")
      .data(data)
      .transition()
@@ -404,7 +484,21 @@ var changegraph=function(data,datum,rank){
      .attr("width",width/23-padding)
      .attr("height",function(d){return height-yScale(d)})
      .attr("class",function(d,i){
-       return datum[i].name;});
+       return datum[i].name;})
+       .attr("fill",function(d,i){
+            return color[i];
+       })
+       d3.selectAll("rect")
+       .on("mouseover",function(d,i){
+         var name=d3.select(this).attr("class");
+         d3.select("p."+name)
+           .style("background-color","orange")
+       })
+       .on("mouseout",function(){
+
+         d3.selectAll("p")
+           .style("background-color","transparent")
+       })
         d3.selectAll("p")
           .data(rank)
           .attr("class",function(d){
@@ -414,8 +508,55 @@ var changegraph=function(data,datum,rank){
             return i+1+". Name: "+d.name+", Grade: "+d.grade;
           })
 }
-//ranking of test1
+//////////////////////////////////////////
+var change=function(data,bdata){
+  d3.selectAll("#rank p").text("");
+  d3.select("#rank h1")
+    .text("Information")
+  var width=500;
+  var height=500;
+  var xScale=d3.scaleLinear()
+               .domain([1,24])
+               .range([margin.left,width+margin.left]);
+  var yScale=d3.scaleLinear()
+               .domain([0,50])
+               .range([height,margin.top]);
+  var svg=d3.select("#test1")
+    .attr("width",width+margin.left+margin.right)
+    .attr("height",height+margin.top+margin.bottom);
+  var xAxis=d3.axisBottom(xScale);
+  var yAxis=d3.axisLeft(yScale);
+  svg.selectAll("rect")
+     .data(bdata)
+     .transition()
+     .attr("x",function(d,i){return xScale(i+1);})
+     .attr("y",function(d){return yScale(Math.abs(d));})
+     .attr("width",width/23-padding)
+     .attr("height",function(d){return height-yScale(Math.abs(d))})
+     .attr("fill",function(d){
+       if(d<0)
+       {return " #004c56";}
+       else {
+       return "#f4841a";
+       }
+     })
+    svg.selectAll("rect")
+     .on("mouseover",function(d,i){
+       d3.select("#rank")
+         .select("p")
+         .style("width","400px")
+         .text(function(){
+           return "Name: "+data[i].name+", Grade1: "+data[i].test1+", Grade2: "+data[i].test2+", Change: "+data[i].change1;
+         })
+     });
+     svg.select("g.testxAxis")
+        .call(xAxis)
+        .attr("transform","translate(0,"+height+")");
+     svg.select("g.testyAxis")
+        .call(yAxis)
+        .attr("transform","translate("+margin.left+",0)");
 
+}
 bgrade.then(function(data){
 
   var test1=data.map(function(d){
@@ -477,3 +618,39 @@ d3.select("#body")
       },function(err){console.log(err);});
     })
     .text("Final");
+d3.select("#body")
+  .append("button")
+  .classed("change1",true)
+  .on("click",function(){
+    changedata.then(function(data){
+      var c1=data.map(function(ele){
+        return ele.change1;
+      })
+      change(data,c1);
+    },function(err){console.log(err)})
+  })
+  .text("Change1")
+  d3.select("#body")
+    .append("button")
+    .classed("change2",true)
+    .on("click",function(){
+      changedata.then(function(data){
+        var c2=data.map(function(ele){
+          return ele.change2;
+        })
+        change(data,c2);
+      },function(err){console.log(err)})
+    })
+    .text("Change2")
+    d3.select("#body")
+      .append("button")
+      .classed("change3",true)
+      .on("click",function(){
+        changedata.then(function(data){
+          var c3=data.map(function(ele){
+            return ele.change3;
+          })
+          change(data,c3);
+        },function(err){console.log(err)})
+      })
+      .text("Change3")
