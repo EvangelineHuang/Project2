@@ -25,6 +25,7 @@ circle{
   position:fixed;
   width:80px;
   padding:10px;
+  margin-top:180px; 
   border-radius: 10px;
   pointer-events:none;
   background-color:white;
