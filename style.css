@@ -1,5 +1,7 @@
+@import url('https://fonts.googleapis.com/css?family=Amaranth');
 body{
   background-color:#dfe6ea;
+  font-family: 'Amaranth', sans-serif;
 }
 #line, #line2,#line3{
   fill:none;
@@ -25,7 +27,7 @@ circle{
   position:fixed;
   width:80px;
   padding:10px;
-  margin-top:180px; 
+  margin-top:180px;
   border-radius: 10px;
   pointer-events:none;
   background-color:white;
