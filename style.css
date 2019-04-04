@@ -71,12 +71,28 @@ circle{
 }
 .student p{
   position:absolute;
+  top:70px;
   left:15px;
   width:100px;
 }
+h3.hw{
+  position: absolute;
+  left:100px;
+  top:350px;
+}
+h3.quiz{
+  position: absolute;
+  left:100px;
+  top:950px;
+}
+h3.te{
+  position: absolute;
+  left:100px;
+  top:1550px;
+}
 #directory{
   position:fixed;
-  bottom:12%;
+  bottom:16%;
   right:80px;
 }
 #home{

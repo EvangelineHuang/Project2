@@ -228,9 +228,22 @@ var graph=function(data,datum,rank,dt){
        d3.select("#note")
          .classed("hidden",true)
        d3.select("#body").remove();
+
        var body=d3.select("body")
          .append("div")
          .attr("id","body")
+         d3.select("#body")
+           .append("h3")
+           .classed("hw",true)
+           .text("Homework Grade");
+           d3.select("#body")
+             .append("h3")
+             .classed("quiz",true)
+             .text("Quiz Grade");
+             d3.select("#body")
+               .append("h3")
+               .classed("te",true)
+               .text("Test and Exam Grade");
       body.append("svg")
           .attr("id","line");
       body.append("svg")
@@ -274,6 +287,7 @@ var graph=function(data,datum,rank,dt){
             var body=d3.select("body")
               .append("div")
               .attr("id","body");
+
             body.append("svg")
                 .attr("id","test1")
             body.append("div")
@@ -418,8 +432,6 @@ var graph=function(data,datum,rank,dt){
           .attr("stroke","none")
       })
 
-
-      
 d3.select("#note")
   .classed("hidden",false)
   svg.append("g")
