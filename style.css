@@ -116,64 +116,43 @@ p{
 .test1{
   position:absolute;
   top:580px;
-  left:30px;
+  left:150px;
   margin-left:20px;
 }
 .test2{
   position:absolute;
-  top:580px;
-  left:130px;
+  top:640px;
+  left:150px;
   margin-left:20px;
 }
 .final{
   position:absolute;
-  top:580px;
-  left:230px;
+  top:700px;
+  left:150px;
   margin-left:20px;
+  width:84.14px
 }
 .wholehtml{
   position:fixed;
   right:20px;
   bottom:50px;
 }
-#info{
-  border:1px black solid;
-  width:510px;
-  height:100px;
-  position:absolute;
-  left:45px;
-  top:550px;
-}
-#note{
-  border-left:1px black solid;
-  width:150px;
-  float:right;
-  height:100px;
-  border-collapse: collapse;
-}
-ul{
-  position:relative;
-  right:10px;
-}
-p.info{
-  width:340px;
-}
 .change1{
   position:absolute;
-  top:680px;
+  top:580px;
   left:30px;
   margin-left:20px;
 }
 .change2{
   position:absolute;
-  top:680px;
-  left:130px;
+  top:640px;
+  left:30px;
   margin-left:20px;
 }
 .change3{
   position:absolute;
-  top:680px;
-  left:230px;
+  top:700px;
+  left:30px;
   margin-left:20px;
 }
 button {
@@ -196,3 +175,30 @@ button:hover {
   position:absolute;
   left:50%;
 }
+a:link{
+  color:#b54f3b;}
+
+a:visited{
+  color:#1c5d45;}
+  div.note{
+    float:none;
+    display:block;
+    width:230px;
+  }
+  div#note{
+    border:2px solid black;
+    width:220px;
+    position:absolute;
+    top:550px;
+    left:300px;
+    padding-left:10px;
+  }
+  #rank p{
+    width:250px;
+  }
+  .hidden{
+    display:none
+  }
+  #legend rect{
+    pointer-events:none;
+  }

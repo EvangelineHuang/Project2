@@ -225,6 +225,8 @@ var graph=function(data,datum,rank,dt){
          .style("background-color","transparent")
      })
      .on("click",function(d,i){
+       d3.select("#note")
+         .classed("hidden",true)
        d3.select("#body").remove();
        var body=d3.select("body")
          .append("div")
@@ -350,7 +352,7 @@ var graph=function(data,datum,rank,dt){
                       var c1=data.map(function(ele){
                         return ele.change1;
                       })
-                      change(data,c1);
+                      change(data,c1,1);
                     },function(err){console.log(err)})
                   })
                   .text("Change1")
@@ -362,7 +364,7 @@ var graph=function(data,datum,rank,dt){
                         var c2=data.map(function(ele){
                           return ele.change2;
                         })
-                        change(data,c2);
+                        change(data,c2,2);
                       },function(err){console.log(err)})
                     })
                     .text("Change2")
@@ -374,7 +376,7 @@ var graph=function(data,datum,rank,dt){
                           var c3=data.map(function(ele){
                             return ele.change3;
                           })
-                          change(data,c3);
+                          change(data,c3),3;
                         },function(err){console.log(err)})
                       })
                       .text("Change3")
@@ -417,13 +419,40 @@ var graph=function(data,datum,rank,dt){
       })
 
 
-      d3.select("#ranking")
-        .text("Test 1")
-
-
+      
+d3.select("#note")
+  .classed("hidden",false)
+  svg.append("g")
+     .attr("id","legend")
+     .classed("hidden",true)
+     .selectAll("rect")
+     .data(["#004c56","#f4841a"])
+     .enter()
+     .append("rect")
+     .attr("x",530)
+     .attr("y",function(d,i){
+       return 50+i*30;
+     })
+     .attr("width",20)
+     .attr("height",20)
+     .attr("fill",function(d){return d});
+   d3.select("g.hidden")
+     .selectAll("text")
+     .data(["Regress","Improve"])
+     .enter()
+     .append("text")
+     .attr("x",470)
+     .attr("y",function(d,i){
+       return 65+i*30;
+     })
+     .text(function(d){return d;})
 }
 ///////////////////////////////////////////
 var changegraph=function(data,datum,rank){
+  d3.select("#note")
+    .classed("hidden",false)
+    d3.select("#legend")
+      .classed("hidden",true)
   var width=500;
   var height=500;
   var xScale=d3.scaleLinear()
@@ -447,7 +476,7 @@ var changegraph=function(data,datum,rank){
        .attr("transform","translate("+margin.left+",0)");
        d3.select("h1")
          .attr("id","#ranking")
-         .text("Ranking: Test 1")
+         .text("Ranking:")
        d3.select("#rank")
          .selectAll("p")
          .data(rank)
@@ -473,7 +502,8 @@ var changegraph=function(data,datum,rank){
              .attr("stroke","none")
          })
 
-
+         d3.select("#rank")
+           .style("height","700px")
 
 
   svg.selectAll("rect")
@@ -509,7 +539,12 @@ var changegraph=function(data,datum,rank){
           })
 }
 //////////////////////////////////////////
-var change=function(data,bdata){
+var change=function(data,bdata,s){
+  d3.select("#legend")
+    .classed("hidden",false)
+  d3.select("#note")
+    .classed("hidden",false)
+
   d3.selectAll("#rank p").text("");
   d3.select("#rank h1")
     .text("Information")
@@ -526,6 +561,8 @@ var change=function(data,bdata){
     .attr("height",height+margin.top+margin.bottom);
   var xAxis=d3.axisBottom(xScale);
   var yAxis=d3.axisLeft(yScale);
+  d3.select("#rank")
+    .style("height","200px")
   svg.selectAll("rect")
      .data(bdata)
      .transition()
@@ -535,7 +572,7 @@ var change=function(data,bdata){
      .attr("height",function(d){return height-yScale(Math.abs(d))})
      .attr("fill",function(d){
        if(d<0)
-       {return " #004c56";}
+       {return "#004c56";}
        else {
        return "#f4841a";
        }
@@ -544,11 +581,18 @@ var change=function(data,bdata){
      .on("mouseover",function(d,i){
        d3.select("#rank")
          .select("p")
-         .style("width","400px")
+         .style("width","500px")
          .text(function(){
-           return "Name: "+data[i].name+", Grade1: "+data[i].test1+", Grade2: "+data[i].test2+", Change: "+data[i].change1;
+           if(s==1)
+           {return "Name: "+data[i].name+", Grade of Test1: "+data[i].test1+", Grade of Test2: "+data[i].test2+", Change: "+data[i].change1;}
+           else if(s==2)
+           {return "Name: "+data[i].name+", Grade of Test2: "+data[i].test2+", Grade of Final: "+data[i].final+", Change: "+data[i].change2;}
+           else if(s==3)
+           {{return "Name: "+data[i].name+", Grade of Test1: "+data[i].test1+", Grade of Final: "+data[i].final+", Change: "+data[i].change3;}}
          })
+
      });
+
      svg.select("g.testxAxis")
         .call(xAxis)
         .attr("transform","translate(0,"+height+")");
@@ -557,6 +601,7 @@ var change=function(data,bdata){
         .attr("transform","translate("+margin.left+",0)");
 
 }
+///////////////////////////////////////
 bgrade.then(function(data){
 
   var test1=data.map(function(d){
@@ -626,7 +671,7 @@ d3.select("#body")
       var c1=data.map(function(ele){
         return ele.change1;
       })
-      change(data,c1);
+      change(data,c1,1);
     },function(err){console.log(err)})
   })
   .text("Change1")
@@ -638,10 +683,11 @@ d3.select("#body")
         var c2=data.map(function(ele){
           return ele.change2;
         })
-        change(data,c2);
+        change(data,c2,2);
       },function(err){console.log(err)})
     })
     .text("Change2")
+
     d3.select("#body")
       .append("button")
       .classed("change3",true)
@@ -650,7 +696,7 @@ d3.select("#body")
           var c3=data.map(function(ele){
             return ele.change3;
           })
-          change(data,c3);
+          change(data,c3,3);
         },function(err){console.log(err)})
       })
       .text("Change3")
