@@ -6,20 +6,44 @@
   </script>
   <body>
     <style>
+    circle:hover{
+      fill:#848c57;
+    }
+    circle{
+      fill:#c6d6b0;
+      stroke:#363813;
+    }
+    #lineTotal{
+      fill:none;
+      stroke:#363813;
+    }
     *{
       margin-top: 20px;
       margin-left: 50px;
     }
+    @import url('https://fonts.googleapis.com/css?family=Amaranth');
     body{
       background-color:#dfe6ea;
+      font-family: 'Amaranth', sans-serif;
     }
-    svg{
+    #totalGrade{
       float: left;
-      margin-left: 150px;
+      position:relative;
+      right:100px;
     }
-    div{
+    .xAxis .tick{
+      display:none;
+    }
+    #pie{
+      float: left;
+      position:absolute;
+      left: 650px;
+      top:300px;
+    }
+    #di{
       float:right;
-      margin-right: 400px;
+      position:absolute;
+      right:350px;
     }
     a:link{
       color:#b54f3b;
@@ -28,10 +52,19 @@
     a:visited{
       color:#1c5d45;
       text-decoration: none;}
+    #total h3{
+      position: absolute;
+      left:250px;
+      top:70px;
+    }
     </style>
 
   <h1>Grade Report</h1>
-   <div>
+  <div id="total">
+  <h3>Total Grade</h3>
+  <svg id="totalGrade"></svg>
+</div>
+   <div id="di">
    <h3><a href="whole.html">Whole Class Grade</a></h3>
      <br/ >
    <h3><a href="individual.html">Individual Grade</a></h3>

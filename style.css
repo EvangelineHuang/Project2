@@ -227,3 +227,6 @@ a:visited{
   #legend rect{
     pointer-events:none;
   }
+  .testxAxis .tick{
+    display:none;
+  }

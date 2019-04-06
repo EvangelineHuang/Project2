@@ -458,6 +458,10 @@ d3.select("#note")
        return 65+i*30;
      })
      .text(function(d){return d;})
+     svg.append("text")
+        .text("student")
+        .attr("transform","translate("+(width+5)+","+(margin.top+height+5)+")")
+
 }
 ///////////////////////////////////////////
 var changegraph=function(data,datum,rank){
@@ -549,6 +553,7 @@ var changegraph=function(data,datum,rank){
           .text(function(d,i){
             return i+1+". Name: "+d.name+", Grade: "+d.grade;
           })
+
 }
 //////////////////////////////////////////
 var change=function(data,bdata,s){
@@ -604,6 +609,9 @@ var change=function(data,bdata,s){
          })
 
      });
+     svg.append("text")
+        .text("student")
+        .attr("transform","translate("+(width+5)+","+(margin.top+height+5)+")")
 
      svg.select("g.testxAxis")
         .call(xAxis)

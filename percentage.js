@@ -12,6 +12,7 @@ var data = [{"label":"Quizzes", "value":15},
 
     var plot = d3.select("body")
                 .append("svg")
+                .attr("id","pie")
                 .attr("width", w)
                 .attr("height", h)
                 .append("g")
@@ -60,3 +61,54 @@ var data = [{"label":"Quizzes", "value":15},
             .text("%")
             .attr("x", 13)
             .attr("y", "1.4em");
+////////////////////////////////////////////////////////////
+var total=d3.csv("AllGrades.csv")
+var width=500;
+var height=500;
+var margin={
+  left:20,
+  top:20,
+  bottom:20,
+  right:40
+}
+total.then(function(data){
+  var t=data.map(function(d,i){
+    return d.total;
+  })
+ var svg=d3.select("#totalGrade")
+           .attr("width",width+margin.right+margin.left)
+           .attr("height",height+margin.top+margin.bottom)
+var xScale=d3.scaleLinear()
+             .domain([0,23])
+             .range([margin.right,width])
+var yScale=d3.scaleLinear()
+             .domain([0,250])
+             .range([height+margin.top,margin.top])
+var line=d3.line()
+           .x(function(d,i){return xScale(i)})
+           .y(function(d){return yScale(d)})
+svg.append("path")
+   .attr("id","lineTotal")
+   .datum(t)
+   .attr("d",line)
+var xAxis=d3.axisBottom(xScale);
+var yAxis=d3.axisLeft(yScale);
+svg.append("g")
+   .attr("class","xAxis")
+   .call(xAxis)
+   .attr("transform","translate(0,"+(margin.top+height)+")")
+svg.append("g")
+   .attr("class","yAxis")
+   .call(yAxis)
+   .attr("transform","translate("+(margin.right)+",0)")
+svg.append("text")
+   .text("student")
+   .attr("transform","translate("+(width+5)+","+(margin.top+height+5)+")")
+svg.selectAll("circle")
+   .data(t)
+   .enter()
+   .append("circle")
+   .attr("cx",function(d,i){return xScale(i)})
+   .attr("cy",function(d){return yScale(d)})
+   .attr("r",5)
+},function(err){console.log(err)})
