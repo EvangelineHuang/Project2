@@ -119,7 +119,7 @@ svg.selectAll("rect")
        .text(d)
       d3.select("#name")
         .data(total)
-         .text(total.name)
+        .text(total.name)
      d3.select("#tooltip").classed("hidden",false);
     })
     .on("mouseout",function(){
