@@ -193,8 +193,11 @@ button {
 button:hover {
   opacity: 0.6;
 }
-button:focus {
+button:active {
   background-color: #bed3c3;
+}
+button:focus {
+  background-color: orange;
 }
 .wstudent{
   position:absolute;

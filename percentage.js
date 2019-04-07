@@ -75,26 +75,62 @@ total.then(function(data){
   var t=data.map(function(d,i){
     return d.total;
   })
- var svg=d3.select("#totalGrade")
+  var n=data.map(function(d,i){
+    return d.name;
+  })
+var svg=d3.select("#totalGrade")
            .attr("width",width+margin.right+margin.left)
            .attr("height",height+margin.top+margin.bottom)
 var xScale=d3.scaleLinear()
              .domain([0,23])
              .range([margin.right,width])
 var yScale=d3.scaleLinear()
-             .domain([0,250])
+             .domain([0,260])
              .range([height+margin.top,margin.top])
 var line=d3.line()
            .x(function(d,i){return xScale(i)})
            .y(function(d){return yScale(d)})
-svg.append("path")
-   .attr("id","lineTotal")
-   .datum(t)
-   .attr("d",line)
+
+var color=["#ccebb4","#bfe6b5","#b4e2b6","#a8ddb7","#9cd8b8","#91d4b9","#86d0bb","#71c8bd","#66c3bf","#59bec0","#4eb9c1","#45b3c2","#3fafc2","#34a7c2","#2c9dc0","#2897bf","#238cbc","#217fb7","#2076b3","#216aae","#225ea8","#2353a3","#23499d"]
+
+svg.selectAll("rect")
+   .attr("id","barTotal")
+   .data(t)
+   .enter()
+   .append("rect")
+   .attr("x", function(d,i){
+     return xScale(i+3);})
+   .attr("y", function(d){
+     return yScale(d);})
+   .attr("width", width/23-3)
+   .attr("height", function(d){
+     return height-yScale(d);})
+   .attr("fill",function(d,i){
+     return color[i];
+   })
+   .attr("transform","translate(-60,20)")
+   .on("mouseover",function(d,i){
+    var xPosition = parseFloat(d3.select(this).attr("x")) + width/23 / 2;
+    var yPosition = parseFloat(d3.select(this).attr("y")) / 2 + height / 2;
+     d3.select("#tooltip")
+       .style("left", xPosition + "px")
+       .style("top", yPosition + "px")
+       .select("#grade")
+       .text(d)
+      d3.select("#name")
+        .data(total)
+         .text(total.name)
+     d3.select("#tooltip").classed("hidden",false);
+    })
+    .on("mouseout",function(){
+     d3.select("#tooltip").classed("hidden",true);
+    });
+
 var xAxis=d3.axisBottom(xScale);
 var yAxis=d3.axisLeft(yScale);
+
 svg.append("g")
-   .attr("class","xAxis")
+   .attr("class","xAxis1")
    .call(xAxis)
    .attr("transform","translate(0,"+(margin.top+height)+")")
 svg.append("g")
@@ -104,11 +140,4 @@ svg.append("g")
 svg.append("text")
    .text("student")
    .attr("transform","translate("+(width+5)+","+(margin.top+height+5)+")")
-svg.selectAll("circle")
-   .data(t)
-   .enter()
-   .append("circle")
-   .attr("cx",function(d,i){return xScale(i)})
-   .attr("cy",function(d){return yScale(d)})
-   .attr("r",5)
 },function(err){console.log(err)})
