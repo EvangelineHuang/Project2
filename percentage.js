@@ -31,7 +31,7 @@ var data = [{"label":"Quizzes", "value":15},
                    .enter()
                    .append("g")
                    .attr("class", "arc");
-
+                   
         arcs.append("path")
             .attr("d", arc)
             .attr("fill",function(d,i){return color(i)})
@@ -118,8 +118,7 @@ svg.selectAll("rect")
        .select("#grade")
        .text(d)
       d3.select("#name")
-        .data(total)
-         .text(total.name)
+         .text(n[i])
      d3.select("#tooltip").classed("hidden",false);
     })
     .on("mouseout",function(){
@@ -130,7 +129,7 @@ var xAxis=d3.axisBottom(xScale);
 var yAxis=d3.axisLeft(yScale);
 
 svg.append("g")
-   .attr("class","xAxis1")
+   .attr("class","xAxis")
    .call(xAxis)
    .attr("transform","translate(0,"+(margin.top+height)+")")
 svg.append("g")
