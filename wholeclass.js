@@ -406,6 +406,7 @@ var graph=function(data,datum,rank,dt){
         .attr("transform","translate(0,"+height+")");
      svg.append("g")
         .classed("testyAxis",true)
+        .transition()
         .call(yAxis)
         .attr("transform","translate("+margin.left+",0)");
     d3.select("#rank")
@@ -488,6 +489,7 @@ var changegraph=function(data,datum,rank){
        .call(xAxis)
        .attr("transform","translate(0,"+height+")");
     svg.select("g.testyAxis")
+       .transition()
        .call(yAxis)
        .attr("transform","translate("+margin.left+",0)");
        d3.select("h1")
@@ -617,6 +619,7 @@ var change=function(data,bdata,s){
         .call(xAxis)
         .attr("transform","translate(0,"+height+")");
      svg.select("g.testyAxis")
+        .transition()
         .call(yAxis)
         .attr("transform","translate("+margin.left+",0)");
 
